@@ -443,7 +443,7 @@ class SearchLinked extends Phaser.Scene {
         // Returns an array with graphics for the node, used when creating new BSTNode (TODO: Move links here too)
         function makeNodeGraphics(key,scene) {
             var array = [];
-            var curtain = scene.add.rectangle(0, 0, 55, 55, 0xe92a7a);
+            var curtain = scene.add.rectangle(0, 0, 55, 55, 0x0bb5ad);
             curtain.setName('curtain');
             var shape = scene.add.rectangle(0, 0, 55, 55, 0x35d330);
             shape.setName('shape');
