@@ -26,11 +26,11 @@ class DeleteLinked extends Phaser.Scene {
         //Instructions
         this.add.text(2700,100, 'Instructions:\nPress BACKSPACE to delete\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent\nPress Z to zoom in and zoom out', { fontSize: '20px', fill: '#000' });
         // Switches from this scene to InsertionLinked
-        var spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        spacebar.on('down', () => {
-            this.scene.stop('DeleteLinked');
-            this.scene.start('SearchLinked');
-        });
+        // var spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        // spacebar.on('down', () => {
+        //     this.scene.stop('DeleteLinked');
+        //     this.scene.start('SearchLinked');
+        // });
 
         // *************PLAYER*************
         var player = this.physics.add.sprite(2500, 300, 'onion');
