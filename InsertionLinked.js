@@ -24,7 +24,7 @@ class InsertionLinked extends Phaser.Scene {
         // Text on top of the game world
         this.add.text(2000,100, 'Level 2: Insert', { fontSize: '30px', fill: '#000' });
         //Instructions
-        this.add.text(2700,100, 'Instructions:\nPress ENTER to insert while standing on null node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent\nPress Z to zoom in and zoom out', { fontSize: '20px', fill: '#000' });
+        this.add.text(2700,100, 'Instructions:\nPress ENTER to insert while standing on null node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
         // Switches from this scene to InsertionLinked
         var spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spacebar.on('down', () => {
@@ -50,22 +50,22 @@ class InsertionLinked extends Phaser.Scene {
         this.cameras.main.zoom = 0.75;
         // this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
-        var isZoomed = true;
-        var keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        keyZ.on('down', function () {
-            var cam = this.cameras.main;
-            if(isZoomed) {  // zoom out
-                cam.stopFollow();
-                cam.pan(root.x, root.y, 2000, 'Power2'); //x to pan to, y to pan to, pan speed?, pan mode
-                cam.zoomTo(0.5, 1000);//zoom distance, duration/speed of zoom
-                isZoomed = false;
-            } else { // zoom in
-                cam.startFollow(player, true, 0.05, 0.05);
-                // cam.pan(player.x, player.y, 2000, 'Power2'); //x to pan to, y to pan to, pan speed?, pan mode
-                cam.zoomTo(1, 1000);//zoom distance, duration/speed of zoom
-                isZoomed = true;
-            }
-        }, this);
+        // var isZoomed = true;
+        // var keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+        // keyZ.on('down', function () {
+        //     var cam = this.cameras.main;
+        //     if(isZoomed) {  // zoom out
+        //         cam.stopFollow();
+        //         cam.pan(root.x, root.y, 2000, 'Power2'); //x to pan to, y to pan to, pan speed?, pan mode
+        //         cam.zoomTo(0.5, 1000);//zoom distance, duration/speed of zoom
+        //         isZoomed = false;
+        //     } else { // zoom in
+        //         cam.startFollow(player, true, 0.05, 0.05);
+        //         // cam.pan(player.x, player.y, 2000, 'Power2'); //x to pan to, y to pan to, pan speed?, pan mode
+        //         cam.zoomTo(1, 1000);//zoom distance, duration/speed of zoom
+        //         isZoomed = true;
+        //     }
+        // }, this);
 
         // this.cameras.world.setBounds(0, 0, 600, 2000);
         // player.setCollideWorldBounds(true);
