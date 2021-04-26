@@ -451,11 +451,12 @@ class SearchLinked extends Phaser.Scene {
             curtain.setName('curtain');
             var shape = scene.add.rectangle(0, 0, 55, 55, 0x35d330);
             shape.setName('shape');
-            if (key == 'null') { //if key is null then the node colour is gray
-                shape.setFillStyle(0xb0b3b0, 1);
-            }
             var keyString = scene.add.text(0,0, '' + key, { fontSize: '20px', fill: '#000' });
             keyString.setName('keyString');
+            if (key == 'null') { //if key is null then the node colour is gray
+                shape.setFillStyle(0xb0b3b0, 1);
+                keyString.setFill(0x858585);
+            }
             Phaser.Display.Align.In.Center(keyString, shape);
             array.push(shape);
             array.push(keyString);
