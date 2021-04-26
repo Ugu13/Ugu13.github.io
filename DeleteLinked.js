@@ -33,7 +33,7 @@ class DeleteLinked extends Phaser.Scene {
         // });
 
         // BST Explanation
-        this.add.text(2700,900, 'How Binary Search Tree works:\nWhen the level begins, the character is set on the root node of the tree. That is the beginning of the tree.\nThe binary search trees are a combination of multiple trees. (subtrees) ...something about subtrees.\nThe nodes in the tree are organized by comparing the values of the nodes.\nThe smaller values are to the left of the node and larger values are to the right of the nodes.\nMove the character to left to find the smaller values and move the character to the right to find the larger values.', { fontSize: '20px', fill: '#000' });
+        this.add.text(2000,900, 'How Binary Search Tree works:\nWhen the level begins, the character is set on the root node of the tree. That is the beginning of the tree.\nThe binary search trees are a combination of multiple trees. (subtrees) ...something about subtrees.\nThe nodes in the tree are organized by comparing the values of the nodes.\nThe smaller values are to the left of the node and larger values are to the right of the nodes.\nMove the character to left to find the smaller values and move the character to the right to find the larger values.', { fontSize: '20px', fill: '#000' });
 
 
         // *************PLAYER*************
@@ -360,7 +360,7 @@ class DeleteLinked extends Phaser.Scene {
                     nodeToDelete = node;
                     nodeToDelete.first.setFillStyle(0xff0090, 1);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x-100,250, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(nodeToDelete.x-200,250, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
                     //var key = min(node.right);
                     //node.key = key;
                 }
