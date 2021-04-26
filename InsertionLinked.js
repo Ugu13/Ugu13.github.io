@@ -32,6 +32,11 @@ class InsertionLinked extends Phaser.Scene {
             this.scene.start('DeleteLinked');
         });
 
+        // BST explanation
+        this.add.text(2700,900, 'How Binary Search Tree works:\nWhen the level begins, the character is set on the root node of the tree. That is the beginning of the tree.\nThe binary search trees are a combination of multiple trees. (subtrees) ...something about subtrees.\nThe nodes in the tree are organized by comparing the values of the nodes.\nThe smaller values are to the left of the node and larger values are to the right of the nodes.\nMove the character to left to find the smaller values and move the character to the right to find the larger values.', { fontSize: '20px', fill: '#000' });
+
+        // When the level begins, the character is set on the root node of the tree. That is the beginning of the tree.\nThe binary search trees are a combination of multiple trees. (subtrees) ...something about subtrees.\nThe nodes in the tree are organized by comparing the values of the nodes.\nThe smaller values are to the left of the node and larger values are to the right of the nodes.\nMove the character to left to find the smaller values and move the character to the right to find the larger values.
+
         // *************PLAYER*************
         var player = this.physics.add.sprite(2500, 300, 'onion');
         player.setBounce(0.1);
