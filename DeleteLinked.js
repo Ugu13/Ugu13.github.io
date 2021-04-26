@@ -360,7 +360,7 @@ class DeleteLinked extends Phaser.Scene {
                     nodeToDelete = node;
                     nodeToDelete.first.setFillStyle(0xff0090, 1);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x-200,250, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(nodeToDelete.x-700,250, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
                     //var key = min(node.right);
                     //node.key = key;
                 }
