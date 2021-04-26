@@ -22,7 +22,7 @@ class SearchLinked extends Phaser.Scene {
 
         // *************SCENE SPECIFIC CODE*************
         // Text on top of the game world
-        this.add.text(2000,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
+        this.add.text(1800,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
         //Instructions
         this.add.text(2700,100, 'Instructions:\nPress ENTER to select the node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent\nPress Z to zoom in and zoom out', { fontSize: '20px', fill: '#000' });
         // Switches from this scene to InsertionLinked
@@ -41,9 +41,9 @@ class SearchLinked extends Phaser.Scene {
         // *************CAMERA AND ZOOM*************
         this.cameras.main.setBounds(0, 0, 5000, 5000);
         // this.cameras.main.startFollow(player, true, 0.08, 0.08);
-        this.cameras.main.centerOn(2500,500);
-        this.cameras.main.zoom = 1;
-        this.cameras.main.startFollow(player, true, 0.05, 0.05);
+        this.cameras.main.centerOn(2700,500);
+        this.cameras.main.zoom = 0.75;
+        // this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
         var isZoomed = true;
         var keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);

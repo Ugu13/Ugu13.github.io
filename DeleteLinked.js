@@ -41,9 +41,9 @@ class DeleteLinked extends Phaser.Scene {
         // *************CAMERA AND ZOOM*************
         this.cameras.main.setBounds(0, 0, 5000, 5000);
         // this.cameras.main.startFollow(player, true, 0.08, 0.08);
-        this.cameras.main.centerOn(2500,500);
-        this.cameras.main.zoom = 1;
-        this.cameras.main.startFollow(player, true, 0.05, 0.05);
+        this.cameras.main.centerOn(2700,500);
+        this.cameras.main.zoom = 0.75;
+        // this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
         var isZoomed = true;
         var keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
