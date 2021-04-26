@@ -22,7 +22,7 @@ class SearchLinked extends Phaser.Scene {
 
         // *************SCENE SPECIFIC CODE*************
         // Text on top of the game world
-        this.add.text(1800,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
+        this.add.text(2000,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
         //Instructions
         this.add.text(2700,100, 'Instructions:\nPress ENTER to select the node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent\nPress Z to zoom in and zoom out', { fontSize: '20px', fill: '#000' });
         // Switches from this scene to InsertionLinked

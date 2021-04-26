@@ -46,7 +46,7 @@ class DeleteLinked extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 5000, 5000);
         // this.cameras.main.startFollow(player, true, 0.08, 0.08);
         this.cameras.main.centerOn(2700,500);
-        this.cameras.main.zoom = 0.75;
+        this.cameras.main.zoom = 0.7;
         // this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
         var isZoomed = true;
@@ -360,7 +360,7 @@ class DeleteLinked extends Phaser.Scene {
                     nodeToDelete = node;
                     nodeToDelete.first.setFillStyle(0xff0090, 1);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x,185, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(nodeToDelete.x-100,250, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
                     //var key = min(node.right);
                     //node.key = key;
                 }
