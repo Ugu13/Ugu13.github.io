@@ -5,7 +5,8 @@
 var config = {
 
     type: Phaser.AUTO, //canvas or WebGL
-    backgroundColor: '#fcffd1',
+    // backgroundColor: '#fcffd1',
+    backgroundColor: '#FFFFFF',
     width: 1600,
     height: 896,
     // width: 800,
@@ -20,7 +21,7 @@ var config = {
             debug: true
         }
     },
-    scene: [SearchLinked, InsertionLinked, DeleteLinked],
+    scene: [BSTIntroduction,SearchLinked, InsertionLinked, DeleteLinked],
     // scene: {
     //     preload: preload,
     //     create: create,

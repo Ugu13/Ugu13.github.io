@@ -25,15 +25,37 @@ class DeleteLinked extends Phaser.Scene {
         this.add.text(2000,100, 'Level 3: Delete', { fontSize: '30px', fill: '#000' });
         //Instructions
         this.add.text(2700,100, 'Instructions:\nPress BACKSPACE to delete\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
+
+         // Clafifications on the Insert Operation
+         var txt = this.make.text({
+            x: 2700,
+            y: 1000,
+            text: 'You always start searching from the root. To find a key in the tree you have to compare it with the root key and go left if it’s smaller or go right if it’s bigger than the root key. You have to repeat this step until the key of node you are on is equal to the key you’re looking for - that’s when you stop and delete (press BACKSPACE). Sometimes the delete operation is more complicated than that - if the node you’re deleting has two children, you need to replace the deleted node with the leftmost node in the right subtree of the deleted node. In this case you’ll be asked to show which node should replace the node you want to delete (by pressing ENTER).',
+            origin: { x: 0.5, y: 0.5 },
+            style: {
+                fontSize:'28px ',
+                fill: 'black',
+                align: 'justify',
+                wordWrap: { width: 1600 }
+            },
+        });
+        console.log(txt.text)
+
+        this.add.text(2300,1130, 'To go back to the home page press ESC', { fontSize: '30px', fill: '#000' });
+
+        // Go back to the home page
+        var keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        keyEscape.on('down', () => {
+            this.scene.stop('DeleteLinked');
+            this.scene.start('BSTIntroduction');
+        });
+
         // Switches from this scene to InsertionLinked
         // var spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         // spacebar.on('down', () => {
         //     this.scene.stop('DeleteLinked');
         //     this.scene.start('SearchLinked');
         // });
-
-        // BST Explanation
-        this.add.text(2000,900, 'How Binary Search Tree works:\nWhen the level begins, the character is set on the root node of the tree. That is the beginning of the tree.\nThe binary search trees are a combination of multiple trees. (subtrees) ...something about subtrees.\nThe nodes in the tree are organized by comparing the values of the nodes.\nThe smaller values are to the left of the node and larger values are to the right of the nodes.\nMove the character to left to find the smaller values and move the character to the right to find the larger values.', { fontSize: '20px', fill: '#000' });
 
 
         // *************PLAYER*************
@@ -753,15 +775,19 @@ class DeleteLinked extends Phaser.Scene {
         // Returns an array with graphics for the node, used when creating new BSTNode (TODO: Move links here too)
         function makeNodeGraphics(key,scene) {
             var array = [];
-            var curtain = scene.add.rectangle(0, 0, 55, 55, 0x0bb5ad);
+            var curtain = scene.add.rectangle(0, 0, 55, 55, 0xbd96d4);
             curtain.setName('curtain');
-            var shape = scene.add.rectangle(0, 0, 55, 55, 0x35d330);
+            var shape = scene.add.rectangle(0, 0, 55, 55, 0x9ad9d7);
             shape.setName('shape');
+            var keyString;
             if (key == 'null') { //if key is null then the node colour is gray
                 shape.setFillStyle(0xb0b3b0, 1);
+                keyString = scene.add.text(0,0, '' + key, { fontSize: '20px', fill: '#5e5e5e' });
+                keyString.setName('keyString');
+            } else {
+                keyString = scene.add.text(0,0, '' + key, { fontSize: '20px', fill: '#000' });
+                keyString.setName('keyString');
             }
-            var keyString = scene.add.text(0,0, '' + key, { fontSize: '20px', fill: '#000' });
-            keyString.setName('keyString');
             Phaser.Display.Align.In.Center(keyString, shape);
             array.push(shape);
             array.push(keyString);
