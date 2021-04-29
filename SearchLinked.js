@@ -248,21 +248,16 @@ class SearchLinked extends Phaser.Scene {
             return moveAllowed;
         }
 
-
         function changeColor(node){
-                node.first.setFillStyle(0xff0090, 1);
-                console.log('An action was executed')
-            }
+            node.first.setFillStyle(0xff0090, 1);
+        }
             
-
-        
 
         // on overlap with a node and when Enter is pressed, the function checks if the selected node's key
         // equals the key that the task asked to find
         function checkSearch(player, node){
             if(node.key == tasks[0]){
                 feedback.destroy();
-                console.log(game)
                 this.time.addEvent({ delay: 500, callback: changeColor(node), callbackScope: this, loop:false });
                 // game.time.events.add(Phaser.Timer.SECOND * 4, changeColor(node), this);
                 // node.first.setFillStyle(0xff0090, 1);
@@ -370,7 +365,6 @@ class SearchLinked extends Phaser.Scene {
         // ***************REDRAW TREE CODE***************
 
         function redrawTree(node,nodeThatIsInTheWay) {
-            console.log("COLLISION");
             updateDistances(node.parent, node.x);
             redraw(root, this);
         }

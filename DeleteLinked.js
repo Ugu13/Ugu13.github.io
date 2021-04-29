@@ -39,7 +39,6 @@ class DeleteLinked extends Phaser.Scene {
                 wordWrap: { width: 1600 }
             },
         });
-        console.log(txt.text)
 
         this.add.text(2300,1130, 'To go back to the home page press ESC', { fontSize: '30px', fill: '#000' });
 
@@ -654,7 +653,6 @@ class DeleteLinked extends Phaser.Scene {
         // ***************REDRAW TREE CODE***************
 
         function redrawTree(node,nodeThatIsInTheWay) {
-            console.log("COLLISION");
             updateDistances(node.parent, node.x);
             redraw(root, this);
         }
