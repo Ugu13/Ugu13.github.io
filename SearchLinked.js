@@ -287,7 +287,7 @@ class SearchLinked extends Phaser.Scene {
                 return scene.add.text(2000,175, 'Find ' + tasks[0] + ' and click ENTER', { fontSize: '22px', fill: '#000' });
             } else {
                 feedback.destroy();
-                return scene.add.text(1900,800, 'Press SPACEBAR to learn new operation', { fontSize: '60px', fill: '#0356f0' });
+                return scene.add.text(1900,1100, 'Press SPACEBAR to learn new operation', { fontSize: '60px', fill: '#0356f0' });
             }
         }
 

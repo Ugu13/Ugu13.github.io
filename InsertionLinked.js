@@ -374,7 +374,7 @@ class InsertionLinked extends Phaser.Scene {
             if (tasks.length != 0) { 
                 return scene.add.text(2000,175, 'Insert ' + tasks[0], { fontSize: '22px', fill: '#000' });
             } else {
-                return scene.add.text(1900,800, 'Press SPACEBAR to learn new operation', { fontSize: '60px', fill: '#0356f0' });
+                return scene.add.text(1900,1100, 'Press SPACEBAR to learn new operation', { fontSize: '60px', fill: '#0356f0' });
             }
         }
        

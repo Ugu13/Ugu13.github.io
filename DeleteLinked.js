@@ -257,7 +257,7 @@ class DeleteLinked extends Phaser.Scene {
 
         //**************MVP ONLY - BUTTON FOR FEEDBACK */
         function createButton(scene){
-            var button = scene.add.text(1900,800, 'Click here to give us feedback', { fontSize: '60px', fill: '#F25278' }).setInteractive();
+            var button = scene.add.text(1900,1100, 'Click here to give us feedback', { fontSize: '60px', fill: '#F25278' }).setInteractive();
             button.on('pointerup', openExternalLink, scene);
             return button;
         }
