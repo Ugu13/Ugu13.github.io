@@ -8,7 +8,7 @@ var config = {
     // backgroundColor: '#fcffd1',
     backgroundColor: '#FFFFFF',
     width: 1600,
-    height: 896,
+    height: 912,
     // width: 800,
     // height: 600,
     scale: {
