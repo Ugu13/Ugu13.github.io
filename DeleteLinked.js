@@ -663,7 +663,6 @@ class DeleteLinked extends Phaser.Scene {
         // ***************REDRAW TREE CODE***************
 
         function redrawTree(node,nodeThatIsInTheWay) {
-            console.log("COLLISION");
             updateDistances(node.parent, node.x);
             redraw(root, this);
         }

@@ -258,15 +258,10 @@ class SearchLinked extends Phaser.Scene {
             return moveAllowed;
         }
 
-
         function changeColor(node){
-                node.first.setFillStyle(0xff0090, 1);
-                console.log('An action was executed')
-            }
+            node.first.setFillStyle(0xff0090, 1);
+        }
             
-
-        
-
         // on overlap with a node and when Enter is pressed, the function checks if the selected node's key
         // equals the key that the task asked to find
         function checkSearch(player, node){
@@ -379,7 +374,6 @@ class SearchLinked extends Phaser.Scene {
         // ***************REDRAW TREE CODE***************
 
         function redrawTree(node,nodeThatIsInTheWay) {
-            console.log("COLLISION");
             updateDistances(node.parent, node.x);
             redraw(root, this);
         }
@@ -411,8 +405,6 @@ class SearchLinked extends Phaser.Scene {
                 var dpth = node.dpth;
 
                 var newNode;
-
-                console.log(node.key);
 
                 if (dpth > 0) {
                     newNode = new BSTNode(scene, parent.x+q, parent.y+w, key, makeNodeGraphics(key,scene));
@@ -449,11 +441,6 @@ class SearchLinked extends Phaser.Scene {
                     node.link.destroy();
                 }
                 node.destroy();
-
-                // var indexofNode = nodearray.indexOf(node); 
-                // console.log("index " + indexofNode);
-                // nodearray[indexofNode] = null;
-                // console.log("key " + node.key);
 
                 newNode.drawLinkToParent(scene);
                 newNode.setDepth(1);
