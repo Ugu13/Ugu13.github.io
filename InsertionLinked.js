@@ -346,8 +346,8 @@ class InsertionLinked extends Phaser.Scene {
 
                     player.setPosition(root.x,root.y-BUFFER);
 
-                    if (childL.dpth > treeDepth) {
-                        treeDepth = childL.dpth;
+                    if (childL.dpth > treedpth) {
+                        treedpth = childL.dpth;
                     }
                 }
                 feedback.destroy();
