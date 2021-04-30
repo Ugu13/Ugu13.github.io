@@ -51,6 +51,7 @@ class SearchLinked extends Phaser.Scene {
         // Switches from this scene to InsertionLinked
         var keySpacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keySpacebar.on('down', () => {
+            console.log("switching to insertion");
             this.scene.switch('InsertionLinked');
         });
 
