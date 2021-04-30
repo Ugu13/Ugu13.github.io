@@ -15,8 +15,8 @@ class InsertionLinked extends Phaser.Scene {
         const BUFFER = 60;
         // Used for intializing overlap of node with node, to be able to redraw the tree only when it expands
         var nodearray = [];
-        // Global tree depth is stored here
-        var treeDepth = 0;
+        // Global tree dpth is stored here
+        var treedpth = 0;
         // A constant used for calculating distances between nodes
         const w = 80;
 
@@ -105,10 +105,12 @@ class InsertionLinked extends Phaser.Scene {
         var root = createRoot(this);
         // Inserts the elements from the array above (numsToInsert)
         createTree(this);
+
+        root.setDepth(1);
         
         function createRoot(scene) {
             var root = new BSTNode(scene, 2500, 300, 'null', makeNodeGraphics('null',scene));
-            root.depth = 0;
+            root.dpth = 0;
             root.setSize(55,55);
             scene.physics.add.existing(root, 1);
             // for the curtain:
@@ -132,22 +134,23 @@ class InsertionLinked extends Phaser.Scene {
             if (node.key == 'null') {
                 var x = node.x;
                 var y = node.y;
-                var depth = node.depth;
+                var dpth = node.dpth;
                 var parent = node.parent;
                 var q = node.distanceFromParent;
                 
                 var newNode = new BSTNode(scene, x, y, key, makeNodeGraphics(key,scene));
-                newNode.depth = depth;
+                newNode.dpth = dpth;
                 newNode.parent = parent;
                 newNode.setSize(55,55);
                 newNode.drawLinkToParent(scene);
                 scene.physics.add.existing(newNode, 1);
                 nodearray.push(newNode);
                 newNode.distanceFromParent = q;
+                newNode.setDepth(1);
 
-                // if the depth that the current node is at is 0, then it means
+                // if the dpth that the current node is at is 0, then it means
                 // a new root is being created here so we need to update the global root.
-                if (depth == 0) {
+                if (dpth == 0) {
                     root = newNode;
                 } else if (parent.left == node) {
                     parent.left = newNode;
@@ -162,23 +165,25 @@ class InsertionLinked extends Phaser.Scene {
 
                 var childL = new BSTNode(scene, x-w, y+w, 'null',makeNodeGraphics('null',scene)); //y+w
                 childL.parent = newNode;
-                childL.depth = depth+1;
+                childL.dpth = dpth+1;
                 childL.setSize(55,55);
                 scene.physics.add.existing(childL, 1);
                 newNode.left = childL;
                 childL.drawLinkToParent(scene);
                 nodearray.push(childL);
                 childL.distanceFromParent = -w;
+                childL.setDepth(1);
 
                 var childR = new BSTNode(scene, x+w, y+w, 'null',makeNodeGraphics('null',scene));
                 childR.parent = newNode;
-                childR.depth = depth+1;
+                childR.dpth = dpth+1;
                 childR.setSize(55,55);
                 scene.physics.add.existing(childR, 1);
                 newNode.right = childR;
                 childR.drawLinkToParent(scene);
                 nodearray.push(childR);
                 childR.distanceFromParent = w;
+                childR.setDepth(1);
 
                 // teleporting
                 scene.physics.add.overlap(player, newNode, teleportLeft, cursorLeftIsPressed, scene);
@@ -210,8 +215,8 @@ class InsertionLinked extends Phaser.Scene {
 
                 player.setPosition(root.x,root.y-BUFFER);
                 
-                if (childL.depth > treeDepth) {
-                    treeDepth = childL.depth;
+                if (childL.dpth > treedpth) {
+                    treedpth = childL.dpth;
                 }
 
                 updateDistances(newNode, childR.x);
@@ -256,13 +261,13 @@ class InsertionLinked extends Phaser.Scene {
                 if(node.key == 'null') {
                     var x = node.x;
                     var y = node.y;
-                    var depth = node.depth;
+                    var dpth = node.dpth;
                     var parent = node.parent;
                     var q = node.distanceFromParent;
                     
                     var newNode = new BSTNode(this, x, y, tasks[0], makeNodeGraphics(tasks[0],this));
                     tasks.shift();
-                    newNode.depth = depth;
+                    newNode.dpth = dpth;
                     newNode.parent = parent;
                     newNode.setSize(55,55);
                     newNode.drawLinkToParent(this);
@@ -273,9 +278,9 @@ class InsertionLinked extends Phaser.Scene {
                         newNode.getByName('curtain').destroy();
                     }
 
-                    // if the depth that the current node is at is 0, then it means
+                    // if the dpth that the current node is at is 0, then it means
                     // a new root is being created here so we need to update the global root.
-                    if (depth == 0) {
+                    if (dpth == 0) {
                         root = newNode;
                     } else if (parent.left == node) {
                         parent.left = newNode;
@@ -294,7 +299,7 @@ class InsertionLinked extends Phaser.Scene {
 
                     var childL = new BSTNode(this, x-w, y+w, 'null', makeNodeGraphics('null',this)); //y+w
                     childL.parent = newNode;
-                    childL.depth = depth+1;
+                    childL.dpth = dpth+1;
                     childL.setSize(55,55);
                     this.physics.add.existing(childL, 1);
                     newNode.left = childL;
@@ -304,7 +309,7 @@ class InsertionLinked extends Phaser.Scene {
 
                     var childR = new BSTNode(this, x+w, y+w, 'null', makeNodeGraphics('null',this));
                     childR.parent = newNode;
-                    childR.depth = depth+1;
+                    childR.dpth = dpth+1;
                     childR.setSize(55,55);
                     this.physics.add.existing(childR, 1);
                     newNode.right = childR;
@@ -341,8 +346,8 @@ class InsertionLinked extends Phaser.Scene {
 
                     player.setPosition(root.x,root.y-BUFFER);
 
-                    if (childL.depth > treeDepth) {
-                        treeDepth = childL.depth;
+                    if (childL.dpth > treeDepth) {
+                        treeDepth = childL.dpth;
                     }
                 }
                 feedback.destroy();
@@ -491,11 +496,11 @@ class InsertionLinked extends Phaser.Scene {
                 var left = node.left;
                 var right = node.right;
                 var parent = node.parent;
-                var depth = node.depth;
+                var dpth = node.dpth;
 
                 var newNode;
 
-                if (depth > 0) {
+                if (dpth > 0) {
                     newNode = new BSTNode(scene, parent.x+q, parent.y+w, key, makeNodeGraphics(key,scene));
                 } else {
                     newNode = new BSTNode(scene, x, y, key, makeNodeGraphics(key,scene));
@@ -509,7 +514,7 @@ class InsertionLinked extends Phaser.Scene {
                     right.parent = newNode;
                 }
 
-                newNode.depth = depth;
+                newNode.dpth = dpth;
                 newNode.parent = parent;
                 newNode.left = left;
                 newNode.right = right;
@@ -517,7 +522,7 @@ class InsertionLinked extends Phaser.Scene {
                 newNode.setSize(55,55);
                 scene.physics.add.existing(newNode, 1);
 
-                if (depth == 0) {
+                if (dpth == 0) {
                     root = newNode;
                 } else if (parent.left == node) {
                     parent.left = newNode;
@@ -529,8 +534,11 @@ class InsertionLinked extends Phaser.Scene {
                     node.link.destroy();
                 }
                 node.destroy();
+                var indexofNode = nodearray.indexOf(node); 
+                nodearray[indexofNode] = null;
 
                 newNode.drawLinkToParent(scene);
+                newNode.setDepth(1);
 
                 if (key != 'null') {
                     scene.physics.add.overlap(player, newNode, teleportLeft, cursorLeftIsPressed, scene);
@@ -550,7 +558,7 @@ class InsertionLinked extends Phaser.Scene {
 
         // ***************HELPERS***************
 
-        // calculates the the depth of the tree
+        // calculates the the dpth of the tree
         // here we give the root node as a parameter
         function height(node) {
             if (node.key === "null") return 0
@@ -639,7 +647,7 @@ class BSTNode extends Phaser.GameObjects.Container
         this.left = null;
         this.right = null;
         this.parent = null;
-        this.depth = null;
+        this.dpth = null;
         this.x = x;
         this.y = y;
         this.distanceFromParent = null;
