@@ -10,12 +10,11 @@ class BSTIntroduction extends Phaser.Scene {
     }
 
     create() {
-// Switches from this scene to SerchLinked
+        // Switches from this scene to SerchLinked
         var spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spacebar.on('down', () => {
-           this.scene.stop('BSTIntroduction');
-           this.scene.start('SearchLinked');
-         });
+           this.scene.switch('SearchLinked');
+        });
 
         this.add.text(650,30, 'What is a BST?\n\n', { font: 'bold 30px Courier', fill: '#000', textAlign: 'center'});
         this.add.text(500, 100, 'Press Space if you know the BST concepts', { font: '20px Courier', fill: '#000', textAlign: 'center'})

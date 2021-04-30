@@ -22,11 +22,11 @@ class SearchLinked extends Phaser.Scene {
 
         // *************SCENE SPECIFIC CODE*************
         // Text on top of the game world
-        this.add.text(2000,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
+        var text1 = this.add.text(2000,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
         //Instructions
-        this.add.text(2700,100, 'Instructions:\nPress ENTER to select the node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
+        var text2 = this.add.text(2700,100, 'Instructions:\nPress ENTER to select the node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
         // Clafifications on the Search Operation
-        var txt = this.make.text({
+        var text3 = this.make.text({
             x: 2700,
             y: 900,
             text: 'You always start searching from the root. To find a key in the tree you have to compare it with the root key and go left if it’s smaller than the root key or go right if it’s bigger than the root key. You have to repeat this step until the key of the node you are on is equal to the key you’re looking for - that’s when you stop because you found the node you are looking for (press ENTER to indicate you’ve found it).',
@@ -39,21 +39,26 @@ class SearchLinked extends Phaser.Scene {
             },
         });
 
-        this.add.text(2300,1030, 'To go back to the home page press ESC', { fontSize: '30px', fill: '#000' });
+        var text4 = this.add.text(2300,1030, 'To go back to the home page press ESC', { fontSize: '30px', fill: '#000' });
 
         // Go back to the home page
         var keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         keyEscape.on('down', () => {
-            this.scene.stop('SearchLinked');
-            this.scene.start('BSTIntroduction');
+            this.scene.switch('BSTIntroduction');
         });
 
 
         // Switches from this scene to InsertionLinked
         var keySpacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keySpacebar.on('down', () => {
-            this.scene.stop('SearchLinked');
-            this.scene.start('InsertionLinked');
+            this.scene.switch('InsertionLinked');
+        });
+
+        // Restart the current scene
+        var keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyR.on('down', () => {
+            destroyEverything();
+            this.scene.restart('SearchLinked');
         });
 
 
@@ -248,10 +253,14 @@ class SearchLinked extends Phaser.Scene {
             return moveAllowed;
         }
 
+
         function changeColor(node){
-            node.first.setFillStyle(0xff0090, 1);
-        }
+                node.first.setFillStyle(0xff0090, 1);
+                console.log('An action was executed')
+            }
             
+
+        
 
         // on overlap with a node and when Enter is pressed, the function checks if the selected node's key
         // equals the key that the task asked to find
@@ -365,6 +374,7 @@ class SearchLinked extends Phaser.Scene {
         // ***************REDRAW TREE CODE***************
 
         function redrawTree(node,nodeThatIsInTheWay) {
+            console.log("COLLISION");
             updateDistances(node.parent, node.x);
             redraw(root, this);
         }
@@ -418,6 +428,7 @@ class SearchLinked extends Phaser.Scene {
                 newNode.distanceFromParent = q;
                 newNode.setSize(55,55);
                 scene.physics.add.existing(newNode, 1);
+                // nodearray.push(newNode);
 
                 if (depth == 0) {
                     root = newNode;
@@ -431,6 +442,11 @@ class SearchLinked extends Phaser.Scene {
                     node.link.destroy();
                 }
                 node.destroy();
+
+                // var indexofNode = nodearray.indexOf(node); 
+                // console.log("index " + indexofNode);
+                // nodearray[indexofNode] = null;
+                // console.log("key " + node.key);
 
                 newNode.drawLinkToParent(scene);
 
@@ -496,6 +512,32 @@ class SearchLinked extends Phaser.Scene {
                 array.push(curtain);
             }
             return array;
+        }
+
+        function destroyEverything() {
+            player.destroy();
+            // nodearray.forEach(item => {
+            //     item = null;
+            // });
+            nodearray = null;
+            destroyBST(root);
+            text1.destroy();
+            text2.destroy();
+            text3.destroy();
+            text4.destroy();
+            feedback.destroy();
+            taskText.destroy();
+        }
+
+        function destroyBST(node) {
+            if (node != null) {
+                destroyBST(node.left);
+                destroyBST(node.right);
+                if (node.link != null) {
+                    node.link.destroy();
+                }
+                node.destroy();
+            }
         }
     }
 

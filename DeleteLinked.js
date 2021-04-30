@@ -22,12 +22,12 @@ class DeleteLinked extends Phaser.Scene {
 
         // *************SCENE SPECIFIC CODE*************
         // Text on top of the game world
-        this.add.text(2000,100, 'Level 3: Delete', { fontSize: '30px', fill: '#000' });
+        var text1 = this.add.text(2000,100, 'Level 3: Delete', { fontSize: '30px', fill: '#000' });
         //Instructions
-        this.add.text(2700,100, 'Instructions:\nPress BACKSPACE to delete\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
+        var text2 = this.add.text(2700,100, 'Instructions:\nPress BACKSPACE to delete\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
 
          // Clafifications on the Insert Operation
-         var txt = this.make.text({
+         var text3 = this.make.text({
             x: 2700,
             y: 1000,
             text: 'You always start searching from the root. To find a key in the tree you have to compare it with the root key and go left if it’s smaller or go right if it’s bigger than the root key. You have to repeat this step until the key of node you are on is equal to the key you’re looking for - that’s when you stop and delete (press BACKSPACE). Sometimes the delete operation is more complicated than that - if the node you’re deleting has two children, you need to replace the deleted node with the leftmost node in the right subtree of the deleted node. In this case you’ll be asked to show which node should replace the node you want to delete (by pressing ENTER).',
@@ -40,13 +40,12 @@ class DeleteLinked extends Phaser.Scene {
             },
         });
 
-        this.add.text(2300,1130, 'To go back to the home page press ESC', { fontSize: '30px', fill: '#000' });
+        var text4 = this.add.text(2300,1130, 'To go back to the home page press ESC', { fontSize: '30px', fill: '#000' });
 
         // Go back to the home page
         var keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         keyEscape.on('down', () => {
-            this.scene.stop('DeleteLinked');
-            this.scene.start('BSTIntroduction');
+            this.scene.switch('BSTIntroduction');
         });
 
         // Switches from this scene to InsertionLinked
@@ -56,6 +55,12 @@ class DeleteLinked extends Phaser.Scene {
         //     this.scene.start('SearchLinked');
         // });
 
+         // Restart the current scene
+        var keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyR.on('down', () => {
+            destroyEverything();
+            this.scene.restart('DeleteLinked');
+        });
 
         // *************PLAYER*************
         var player = this.physics.add.sprite(2500, 300, 'onion');
@@ -653,6 +658,7 @@ class DeleteLinked extends Phaser.Scene {
         // ***************REDRAW TREE CODE***************
 
         function redrawTree(node,nodeThatIsInTheWay) {
+            console.log("COLLISION");
             updateDistances(node.parent, node.x);
             redraw(root, this);
         }
@@ -793,6 +799,32 @@ class DeleteLinked extends Phaser.Scene {
                 array.push(curtain);
             }
             return array;
+        }
+
+        function destroyEverything() {
+            player.destroy();
+            // nodearray.forEach(item => {
+            //     item = null;
+            // });
+            nodearray = null;
+            destroyBST(root);
+            text1.destroy();
+            text2.destroy();
+            text3.destroy();
+            text4.destroy();
+            feedback.destroy();
+            taskText.destroy();
+        }
+
+        function destroyBST(node) {
+            if (node != null) {
+                destroyBST(node.left);
+                destroyBST(node.right);
+                if (node.link != null) {
+                    node.link.destroy();
+                }
+                node.destroy();
+            }
         }
 
     }
