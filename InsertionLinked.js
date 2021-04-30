@@ -277,6 +277,7 @@ class InsertionLinked extends Phaser.Scene {
                     if(newNode.getByName('curtain')){
                         newNode.getByName('curtain').destroy();
                     }
+                    newNode.setDepth(1);
 
                     // if the dpth that the current node is at is 0, then it means
                     // a new root is being created here so we need to update the global root.
@@ -306,6 +307,7 @@ class InsertionLinked extends Phaser.Scene {
                     childL.drawLinkToParent(this);
                     nodearray.push(childL);
                     childL.distanceFromParent = -w;
+                    childL.setDepth(1);
 
                     var childR = new BSTNode(this, x+w, y+w, 'null', makeNodeGraphics('null',this));
                     childR.parent = newNode;
@@ -316,6 +318,7 @@ class InsertionLinked extends Phaser.Scene {
                     childR.drawLinkToParent(this);
                     nodearray.push(childR);
                     childR.distanceFromParent = w;
+                    childR.setDepth(1);
 
                     // teleporting
                     this.physics.add.overlap(player, newNode, teleportLeft, cursorLeftIsPressed, this);
