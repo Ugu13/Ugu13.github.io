@@ -16,16 +16,18 @@ class BSTIntroduction extends Phaser.Scene {
            this.scene.switch('SearchLinked');
         });
 
-        this.add.text(650,30, 'What is a BST?\n\n', { font: 'bold 30px Courier', fill: '#000', textAlign: 'center'});
-        this.add.text(500, 100, 'Press Space if you know the BST concepts', { font: '20px Courier', fill: '#eb4034', textAlign: 'center'})
-         var txt = this.make.text({
+        this.cameras.main.zoom = 0.75;
+        this.add.text(650,70, 'What is a BST?\n\n', { font: 'bold 30px Courier', fill: '#000', textAlign: 'center'});
+        this.add.text(200,0, 'Press Space if you know the BST concepts', { font: '50px Courier', fill: '#fc0303', textAlign: 'center'})
+        var txt = this.make.text({
             x: 810,
             y: 300,
-            text: 'A Binary Search Tree (BST) is a data structure that looks much like a physical tree from the natural world. It is structured using objects called nodes. Every node has a key. Every tree starts with a root node, which is the starting point of all operations performed on the tree. The root node (parent) is connected only to two other nodes (children) through links - because of that the tree is called a binary tree. The tree property requires that every child node to the left has a smaller key than the parent and every child node to the right has a bigger key than the parent. Null key indicates that a node doesn’t have an assigned key and has no links (children).\n\nThe Binary Search Tree is a structure that can contain multiple subtrees. The child of every parent is a root of a subtree.This data structure helps to organise data more quickly. Binary search trees are primarily used for searching and sorting operations.',
+            text: 'A Binary Search Tree (BST) is a data structure that looks much like a physical tree from the natural world. It is structured using objects called nodes. Every node has a key. Every tree starts with a root node, which is the starting point of all operations performed on the tree. The root node (parent) is connected only to two other nodes (children) through links - because of that the tree is called a binary tree. The search tree property requires that every child node to the left has a smaller key than the parent and every child node to the right has a bigger key than the parent. Null key indicates that a node doesn’t have an assigned key and has no links (children).\n\nThe Binary Search Tree is a structure that can contain multiple subtrees. The child of every parent is a root of a subtree. This data structure helps to organise data more quickly. Binary search trees are primarily used for searching and sorting operations.',
             origin: { x: 0.5, y: 0.5 },
             style: {
                 fontSize:'28px ',
                 fill: 'black',
+                align: 'justify',
                 wordWrap: { width: 1600 }
             },
         });
@@ -42,7 +44,7 @@ class BSTIntroduction extends Phaser.Scene {
                 wordWrap: { width: 850 }
             },
         });
-        var treePicture = this.add.image(1100, 700, 'tree'). setScale(0.4);
+        var treePicture = this.add.image(1200, 700, 'tree'). setScale(0.5);
       
     }
 

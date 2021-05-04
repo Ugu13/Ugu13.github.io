@@ -24,7 +24,7 @@ class DeleteLinked extends Phaser.Scene {
         // Text on top of the game world
         var text1 = this.add.text(2000,100, 'Level 3: Delete', { fontSize: '30px', fill: '#000' });
         //Instructions
-        var text2 = this.add.text(2700,100, 'Instructions:\nPress BACKSPACE to delete\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
+        var text2 = this.add.text(2700,100, 'Instructions:\n⌫ delete (BACKSPACE)\n← move to the left child\n→ move to the right child\n↑ move to the parent', { fontSize: '27px', fill: '#000' });
 
          // Clafifications on the Insert Operation
          var text3 = this.make.text({
@@ -60,6 +60,7 @@ class DeleteLinked extends Phaser.Scene {
         keyR.on('down', () => {
             destroyEverything();
             this.scene.restart('DeleteLinked');
+            this.input.keyboard.removeAllKeys(true);
         });
 
         // *************PLAYER*************
@@ -71,7 +72,7 @@ class DeleteLinked extends Phaser.Scene {
         // *************CAMERA AND ZOOM*************
         this.cameras.main.setBounds(0, 0, 5000, 5000);
         // this.cameras.main.startFollow(player, true, 0.08, 0.08);
-        this.cameras.main.centerOn(2700,500);
+        this.cameras.main.centerOn(2615,500);
         this.cameras.main.zoom = 0.7;
         // this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
@@ -317,7 +318,17 @@ class DeleteLinked extends Phaser.Scene {
                     redraw(root,this);
                     player.setPosition(root.x,root.y-BUFFER);
                     feedback.destroy();
-                    feedback = this.add.text(2000,150, 'Good job!!!', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(2350,400, 'Good job!!!', { fontSize: '40px', fill: '#49ab35' });
+                    this.add.tween({
+                        targets: feedback,
+                        ease: 'Sine.easeInOut',
+                        duration: 2000,
+                        delay: 1000,
+                        alpha: {
+                          getStart: () => 100,
+                          getEnd: () => 0
+                        }
+                    });                    
                     tasks.shift();
                     taskText.destroy();
                     taskText = displayText(this);
@@ -350,7 +361,17 @@ class DeleteLinked extends Phaser.Scene {
                     redraw(root,this);
                     player.setPosition(root.x,root.y-BUFFER);
                     feedback.destroy();
-                    feedback = this.add.text(2000,150, 'Good job!!!', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(2350,400, 'Good job!!!', { fontSize: '40px', fill: '#49ab35' });
+                    this.add.tween({
+                        targets: feedback,
+                        ease: 'Sine.easeInOut',
+                        duration: 2000,
+                        delay: 1000,
+                        alpha: {
+                          getStart: () => 100,
+                          getEnd: () => 0
+                        }
+                    });                      
                     tasks.shift();
                     taskText.destroy();
                     taskText = displayText(this);
@@ -383,7 +404,17 @@ class DeleteLinked extends Phaser.Scene {
                     redraw(root,this);
                     player.setPosition(root.x,root.y-BUFFER);
                     feedback.destroy();
-                    feedback = this.add.text(2000,150, 'Good job!!!', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(2350,400, 'Good job!!!', { fontSize: '40px', fill: '#49ab35' });
+                    this.add.tween({
+                        targets: feedback,
+                        ease: 'Sine.easeInOut',
+                        duration: 2000,
+                        delay: 1000,
+                        alpha: {
+                          getStart: () => 100,
+                          getEnd: () => 0
+                        }
+                    });                      
                     tasks.shift();
                     taskText.destroy();
                     taskText = displayText(this);
@@ -391,7 +422,7 @@ class DeleteLinked extends Phaser.Scene {
                     nodeToDelete = node;
                     nodeToDelete.first.setFillStyle(0xff0090, 1);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x-700,250, 'Now select the node you want to exchange the deleted node with.\nUse Enter.', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(nodeToDelete.x-700,250, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).', { fontSize: '20px', fill: '#ff0090' });
                     //var key = min(node.right);
                     //node.key = key;
                 }
@@ -401,11 +432,21 @@ class DeleteLinked extends Phaser.Scene {
             }
             else{
                 feedback.destroy();
-                feedback = this.add.text(2000,150, 'Try again', { fontSize: '20px', fill: '#000' });
+                feedback = this.add.text(2350,400, 'Try again', { fontSize: '40px', fill: '#e058a0' });
+                this.add.tween({
+                    targets: feedback,
+                    ease: 'Sine.easeInOut',
+                    duration: 2000,
+                    delay: 1000,
+                    alpha: {
+                      getStart: () => 100,
+                      getEnd: () => 0
+                    }
+                });                
                 if(nodeToDelete != null) //node.left.key  != 'null' && node.right.key  != 'null' && 
                 {
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x,185, 'Now select the node you want to exchange the deleted node with.\nUse Enter.\n\nTRY AGAIN', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(nodeToDelete.x-700,260, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).\nTRY AGAIN', { fontSize: '20px', fill: '#ff0090' });
                 }else{
                     player.setPosition(root.x,root.y-BUFFER);
                 }
@@ -438,7 +479,17 @@ class DeleteLinked extends Phaser.Scene {
                     player.setPosition(root.x,root.y-BUFFER);
                     nodeToDelete = null; 
                     feedback.destroy();
-                    feedback = this.add.text(2000,150, 'Good job!!!', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(2350,400, 'Good job!!!', { fontSize: '40px', fill: '#49ab35' });
+                    this.add.tween({
+                        targets: feedback,
+                        ease: 'Sine.easeInOut',
+                        duration: 2000,
+                        delay: 1000,
+                        alpha: {
+                          getStart: () => 100,
+                          getEnd: () => 0
+                        }
+                    });                      
                     tasks.shift();
                     taskText.destroy();
                     taskText = displayText(this);
@@ -446,7 +497,7 @@ class DeleteLinked extends Phaser.Scene {
                 else{
                     player.setPosition(nodeToDelete.x,nodeToDelete.y-BUFFER);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x,175, 'Now select the node you want to exchange the deleted node with.\nUse Enter.\n\nTRY AGAIN', { fontSize: '20px', fill: '#000' });
+                    feedback = this.add.text(nodeToDelete.x-700,260, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).\nTRY AGAIN', { fontSize: '20px', fill: '#ff0090' });
                 }
             }
         }
@@ -808,11 +859,9 @@ class DeleteLinked extends Phaser.Scene {
 
         function destroyEverything() {
             player.destroy();
-            // nodearray.forEach(item => {
-            //     item = null;
-            // });
-            nodearray = null;
             destroyBST(root);
+            nodearray = null;
+            root = null;
             text1.destroy();
             text2.destroy();
             text3.destroy();

@@ -24,7 +24,7 @@ class SearchLinked extends Phaser.Scene {
         // Text on top of the game world
         var text1 = this.add.text(2000,100, 'Level 1: Search', { fontSize: '30px', fill: '#000' });
         //Instructions
-        var text2 = this.add.text(2700,100, 'Instructions:\nPress ENTER to select the node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
+        var text2 = this.add.text(2700,100, 'Instructions:\n↩ select the node (ENTER)\n← move to the left child\n→ move to the right child\n↑ move to the parent', { fontSize: '25px', fill: '#000' });
         // Clafifications on the Search Operation
         var text3 = this.make.text({
             x: 2700,
@@ -59,6 +59,7 @@ class SearchLinked extends Phaser.Scene {
         keyR.on('down', () => {
             destroyEverything();
             this.scene.restart('SearchLinked');
+            this.input.keyboard.removeAllKeys(true);
         });
 
 
@@ -257,31 +258,47 @@ class SearchLinked extends Phaser.Scene {
             }
             return moveAllowed;
         }
-
-        function changeColor(node){
-            node.first.setFillStyle(0xff0090, 1);
-        }
             
         // on overlap with a node and when Enter is pressed, the function checks if the selected node's key
         // equals the key that the task asked to find
         function checkSearch(player, node){
             if(node.key == tasks[0]){
                 feedback.destroy();
-                this.time.addEvent({ delay: 500, callback: changeColor(node), callbackScope: this, loop:false });
-                // game.time.events.add(Phaser.Timer.SECOND * 4, changeColor(node), this);
-                // node.first.setFillStyle(0xff0090, 1);
-                feedback = this.add.text(2000,150, 'Good job!!!', { fontSize: '20px', fill: '#000' });
-                // shoot(100);
+                feedback = this.add.text(2350,400, 'Good job!!!', { fontSize: '40px', fill: '#49ab35' });
+                this.add.tween({
+                    targets: feedback,
+                    ease: 'Sine.easeInOut',
+                    duration: 2000,
+                    delay: 1000,
+                    alpha: {
+                      getStart: () => 100,
+                      getEnd: () => 0
+                    }
+                });
                 tasks.shift();
                 taskText.destroy();
                 taskText = displayText(this);
             }
             else{
                 feedback.destroy();
-                feedback = this.add.text(2000,150, 'Try again', { fontSize: '20px', fill: '#000' });
+                feedback = this.add.text(2350,400, 'Try again', { fontSize: '40px', fill: '#e058a0' });
+                this.add.tween({
+                    targets: feedback,
+                    ease: 'Sine.easeInOut',
+                    duration: 2000,
+                    delay: 1000,
+                    alpha: {
+                      getStart: () => 100,
+                      getEnd: () => 0
+                    }
+                });
             }
             player.setPosition(root.x,root.y-BUFFER);
             redraw(root, this);
+        }
+
+        function fadeText() {
+            this.add.tween(feedback).to( { alpha: 0 }, 2000, Phaser.Easing.Linear.None, true);
         }
 
         //while there are still some tasks in the array, displays text indicating what needs to be done
@@ -514,8 +531,9 @@ class SearchLinked extends Phaser.Scene {
             // nodearray.forEach(item => {
             //     item = null;
             // });
-            nodearray = null;
             destroyBST(root);
+            nodearray = null;
+            root = null;
             text1.destroy();
             text2.destroy();
             text3.destroy();

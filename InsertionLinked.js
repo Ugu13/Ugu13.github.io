@@ -24,7 +24,7 @@ class InsertionLinked extends Phaser.Scene {
         // Text on top of the game world
         var text1 = this.add.text(2000,100, 'Level 2: Insert', { fontSize: '30px', fill: '#000' });
         //Instructions
-        var text2 = this.add.text(2700,100, 'Instructions:\nPress ENTER to insert while standing on null node\nPress left arrow to move to the left child\nPress right arrow to move to the right child\nPress up arrow to move to the parent', { fontSize: '20px', fill: '#000' });
+        var text2 = this.add.text(2700,100, 'Instructions:\n↩ insert (while standing on null node) (ENTER)\n← move to the left child\n→ move to the right child\n↑ move to the parent', { fontSize: '25px', fill: '#000' });
 
         // Clafifications on the Insert Operation
         var text3 = this.make.text({
@@ -59,6 +59,7 @@ class InsertionLinked extends Phaser.Scene {
         keyR.on('down', () => {
             destroyEverything();
             this.scene.restart('InsertionLinked');
+            this.input.keyboard.removeAllKeys(true);
         });
 
         // *************PLAYER*************
@@ -116,6 +117,7 @@ class InsertionLinked extends Phaser.Scene {
             // for the curtain:
             scene.physics.add.overlap(player, root, revealValue, null, scene);
             scene.physics.add.collider(player, root);
+            nodearray.push(root)
             return root;
         }
 
@@ -157,6 +159,8 @@ class InsertionLinked extends Phaser.Scene {
                 } else if (parent.right == node) {
                     parent.right = newNode;
                 }
+
+                nodearray.splice(nodearray.indexOf(node),1)
 
                 if (node.link != null) {
                     node.link.destroy();
@@ -265,6 +269,7 @@ class InsertionLinked extends Phaser.Scene {
                     var parent = node.parent;
                     var q = node.distanceFromParent;
                     
+                    
                     var newNode = new BSTNode(this, x, y, tasks[0], makeNodeGraphics(tasks[0],this));
                     tasks.shift();
                     newNode.dpth = dpth;
@@ -278,6 +283,8 @@ class InsertionLinked extends Phaser.Scene {
                         newNode.getByName('curtain').destroy();
                     }
                     newNode.setDepth(1);
+
+                    nodearray.splice(nodearray.indexOf(node),1)
 
                     // if the dpth that the current node is at is 0, then it means
                     // a new root is being created here so we need to update the global root.
@@ -354,13 +361,33 @@ class InsertionLinked extends Phaser.Scene {
                     }
                 }
                 feedback.destroy();
-                feedback = this.add.text(2000,150, 'Good job!!!', { fontSize: '20px', fill: '#000' });
+                feedback = this.add.text(2350,400, 'Good job!!!', { fontSize: '40px', fill: '#49ab35' });
+                this.add.tween({
+                    targets: feedback,
+                    ease: 'Sine.easeInOut',
+                    duration: 2000,
+                    delay: 1000,
+                    alpha: {
+                      getStart: () => 100,
+                      getEnd: () => 0
+                    }
+                });
                 taskText.destroy();
                 taskText = displayText(this);
                 // redraw(root, this);
             } else {
                 feedback.destroy();
-                feedback = this.add.text(2000,150, 'Try again', { fontSize: '20px', fill: '#000' });
+                feedback = this.add.text(2350,400, 'Try again', { fontSize: '40px', fill: '#e058a0' });
+                this.add.tween({
+                    targets: feedback,
+                    ease: 'Sine.easeInOut',
+                    duration: 2000,
+                    delay: 1000,
+                    alpha: {
+                      getStart: () => 100,
+                      getEnd: () => 0
+                    }
+                });
                 player.setPosition(root.x,root.y-BUFFER);
                 redraw(root, this);
             }
@@ -532,6 +559,9 @@ class InsertionLinked extends Phaser.Scene {
                     parent.right = newNode;
                 }
 
+                
+                // nodearray.splice(nodearray.indexOf(node),1)
+
                 if (node.link != null) {
                     node.link.destroy();
                 }
@@ -541,6 +571,9 @@ class InsertionLinked extends Phaser.Scene {
 
                 newNode.drawLinkToParent(scene);
                 newNode.setDepth(1);
+
+                // nodearray.push(newNode)
+               
 
                 if (key != 'null') {
                     scene.physics.add.overlap(player, newNode, teleportLeft, cursorLeftIsPressed, scene);
@@ -608,17 +641,15 @@ class InsertionLinked extends Phaser.Scene {
 
         function destroyEverything() {
             player.destroy();
-            // nodearray.forEach(item => {
-            //     item = null;
-            // });
-            nodearray = null;
-            destroyBST(root);
             text1.destroy();
             text2.destroy();
             text3.destroy();
             text4.destroy();
             feedback.destroy();
             taskText.destroy();
+            destroyBST(root);
+            nodearray = null;
+            root = null;
         }
 
         function destroyBST(node) {
@@ -628,9 +659,14 @@ class InsertionLinked extends Phaser.Scene {
                 if (node.link != null) {
                     node.link.destroy();
                 }
-                node.destroy();
+                node.destroy()
+                node = null;
+                
+            
+                
             }
         }
+
     }
 
     update() {
