@@ -24,7 +24,7 @@ class InsertionLinked extends Phaser.Scene {
         // Text on top of the game world
         var text1 = this.add.text(2000,100, 'Level 2: Insert', { fontSize: '30px', fill: '#000' });
         //Instructions
-        var text2 = this.add.text(2700,100, 'Instructions:\n↩ insert (while standing on null node) (ENTER)\n← move to the left child\n→ move to the right child\n↑ move to the parent', { fontSize: '25px', fill: '#000' });
+        var text2 = this.add.text(2700,100, 'Instructions:\n↩ insert (while standing on null node) (ENTER)\n← move to the left child\n→ move to the right child\n↑ move to the parent\nR to restart the level', { fontSize: '25px', fill: '#000' });
 
         // Clafifications on the Insert Operation
         var text3 = this.make.text({
