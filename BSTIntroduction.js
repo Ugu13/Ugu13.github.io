@@ -18,7 +18,7 @@ class BSTIntroduction extends Phaser.Scene {
 
         this.cameras.main.zoom = 0.75;
         this.add.text(650,70, 'What is a BST?\n\n', { font: 'bold 30px Courier', fill: '#000', textAlign: 'center'});
-        this.add.text(200,0, 'Press Space if you know the BST concepts', { font: '50px Courier', fill: '#fc0303', textAlign: 'center'})
+        this.add.text(195,0, 'Press Spacebar if you know the BST concepts', { font: '50px Courier', fill: '#fc0303', textAlign: 'center'})
         var txt = this.make.text({
             x: 810,
             y: 300,
