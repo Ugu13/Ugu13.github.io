@@ -305,7 +305,7 @@ class SearchLinked extends Phaser.Scene {
         //when tasks is empty then press P to continue to next lesson
         function displayText(scene) {
             if (tasks.length != 0) { 
-                return scene.add.text(2000,175, 'Find ' + tasks[0] + ' and click ENTER', { fontSize: '22px', fill: '#000' });
+                return scene.add.text(2000,175, 'Find ' + tasks[0] + ' and press ENTER', { fontSize: '22px', fill: '#000' });
             } else {
                 feedback.destroy();
                 return scene.add.text(1900,1100, 'Press SPACEBAR to learn new operation', { fontSize: '60px', fill: '#0356f0' });
