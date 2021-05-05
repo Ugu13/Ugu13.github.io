@@ -422,7 +422,7 @@ class DeleteLinked extends Phaser.Scene {
                     nodeToDelete = node;
                     nodeToDelete.first.setFillStyle(0xff0090, 1);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x-700,250, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).', { fontSize: '20px', fill: '#ff0090' });
+                    feedback = this.add.text(nodeToDelete.x-500,300, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).', { fontSize: '20px', fill: '#ff0090' });
                     //var key = min(node.right);
                     //node.key = key;
                 }
@@ -446,7 +446,7 @@ class DeleteLinked extends Phaser.Scene {
                 if(nodeToDelete != null) //node.left.key  != 'null' && node.right.key  != 'null' && 
                 {
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x-700,260, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).\nTRY AGAIN', { fontSize: '20px', fill: '#ff0090' });
+                    feedback = this.add.text(nodeToDelete.x-500,300, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).\nTRY AGAIN', { fontSize: '20px', fill: '#ff0090' });
                 }else{
                     player.setPosition(root.x,root.y-BUFFER);
                 }
@@ -497,7 +497,7 @@ class DeleteLinked extends Phaser.Scene {
                 else{
                     player.setPosition(nodeToDelete.x,nodeToDelete.y-BUFFER);
                     feedback.destroy();
-                    feedback = this.add.text(nodeToDelete.x-700,260, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).\nTRY AGAIN', { fontSize: '20px', fill: '#ff0090' });
+                    feedback = this.add.text(nodeToDelete.x-500,300, 'Now select the node you want to exchange the deleted node with.\nUse ↩ (ENTER).\nTRY AGAIN', { fontSize: '20px', fill: '#ff0090' });
                 }
             }
         }
