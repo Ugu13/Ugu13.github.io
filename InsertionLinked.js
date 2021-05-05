@@ -5,7 +5,7 @@ class InsertionLinked extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('onion', 'Assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        // this.load.spritesheet('onion', 'Assets/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.image('onion', 'Assets/onion.png');
     }
 
